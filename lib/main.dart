@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:new_byte_bank/database/app_database.dart';
+import 'package:new_byte_bank/models/contact.dart';
 import 'package:new_byte_bank/screens/contact_form.dart';
 import 'package:new_byte_bank/screens/contacts_list.dart';
 import 'package:new_byte_bank/screens/dashoard.dart';
 
-void main() => runApp(BytebankApp());
+void main() {
+  runApp(BytebankApp());
+  save(Contact(0, 'Alex', 10000)).then((id) {
+    findAll().then((contacts) => debugPrint(contacts.toString()));
+  });
+}
 
 class BytebankApp extends StatelessWidget {
   // This widget is the root of your application.
