@@ -7,9 +7,6 @@ import 'package:new_byte_bank/screens/dashoard.dart';
 
 void main() {
   runApp(BytebankApp());
-  save(Contact(0, 'Alex', 10000)).then((id) {
-    findAll().then((contacts) => debugPrint(contacts.toString()));
-  });
 }
 
 class BytebankApp extends StatelessWidget {
