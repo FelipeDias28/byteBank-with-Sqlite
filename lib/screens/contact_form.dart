@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_byte_bank/database/app_database.dart';
+import 'package:new_byte_bank/database/dao/contact_dao.dart';
 import 'package:new_byte_bank/models/contact.dart';
 
 class ContactForm extends StatefulWidget {
@@ -14,6 +14,8 @@ class _ContactFormState extends State<ContactForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _accountNumberControllerr =
       TextEditingController();
+
+  final ContactDao _dao = ContactDao();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class _ContactFormState extends State<ContactForm> {
                         int.tryParse(_accountNumberControllerr.text);
 
                     final Contact newContact = Contact(0, name, accountNumber);
-                    save(newContact).then((id) => Navigator.pop(context));
+                    _dao.save(newContact).then((id) => Navigator.pop(context));
                   },
                   child: const Text('Create'),
                 ),

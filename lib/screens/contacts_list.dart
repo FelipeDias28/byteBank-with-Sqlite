@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:new_byte_bank/database/app_database.dart';
+import 'package:new_byte_bank/database/dao/contact_dao.dart';
 import 'package:new_byte_bank/models/contact.dart';
 import 'package:new_byte_bank/screens/contact_form.dart';
 
 class ContactList extends StatelessWidget {
-  const ContactList({Key? key}) : super(key: key);
+  final ContactDao _dao = ContactDao();
+
+  ContactList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +16,10 @@ class ContactList extends StatelessWidget {
       ),
       body: FutureBuilder<List<Contact>>(
         initialData: const [],
-        future: findAll(),
+        future: _dao.findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
-            // Quando o future ainda naão foi executado.
+            // Quando o future ainda não foi executado.
             case ConnectionState.none:
               break;
             // Quando ainda esta carregando e não foi iniciado.

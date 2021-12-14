@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:new_byte_bank/database/app_database.dart';
-import 'package:new_byte_bank/models/contact.dart';
-import 'package:new_byte_bank/screens/contact_form.dart';
-import 'package:new_byte_bank/screens/contacts_list.dart';
+
 import 'package:new_byte_bank/screens/dashoard.dart';
 
 void main() {
-  runApp(BytebankApp());
+  runApp(const BytebankApp());
 }
 
 class BytebankApp extends StatelessWidget {
+  const BytebankApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
