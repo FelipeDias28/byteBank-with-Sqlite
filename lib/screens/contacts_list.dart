@@ -3,10 +3,15 @@ import 'package:new_byte_bank/database/dao/contact_dao.dart';
 import 'package:new_byte_bank/models/contact.dart';
 import 'package:new_byte_bank/screens/contact_form.dart';
 
-class ContactList extends StatelessWidget {
-  final ContactDao _dao = ContactDao();
+class ContactList extends StatefulWidget {
+  const ContactList({Key? key}) : super(key: key);
 
-  ContactList({Key? key}) : super(key: key);
+  @override
+  State<ContactList> createState() => _ContactListState();
+}
+
+class _ContactListState extends State<ContactList> {
+  final ContactDao _dao = ContactDao();
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +58,11 @@ class ContactList extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const ContactForm(),
-          ));
+          Navigator.of(context)
+              .push(MaterialPageRoute(
+                builder: (context) => const ContactForm(),
+              ))
+              .then((value) => setState(() {}));
         },
         child: const Icon(Icons.add),
       ),
