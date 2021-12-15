@@ -19,13 +19,29 @@ class Dashboard extends StatelessWidget {
             child: Image.asset('images/bytebank_logo.png'),
           ),
           Row(
-            children: const [
-              _FeatureItem(name: 'Transfer', icon: Icons.monetization_on),
-              _FeatureItem(name: 'Transaction Feed', icon: Icons.description),
+            children: [
+              _FeatureItem(
+                name: 'Transfer',
+                icon: Icons.monetization_on,
+                onClick: () {
+                  _showContactsList(context);
+                },
+              ),
+              _FeatureItem(
+                name: 'Transaction Feed',
+                icon: Icons.description,
+                onClick: () {},
+              ),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  void _showContactsList(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const ContactList()),
     );
   }
 }
@@ -33,11 +49,13 @@ class Dashboard extends StatelessWidget {
 class _FeatureItem extends StatelessWidget {
   final String name;
   final IconData icon;
+  final Function onClick;
 
   const _FeatureItem({
     Key? key,
     required this.icon,
     required this.name,
+    required this.onClick,
   }) : super(key: key);
 
   @override
@@ -48,9 +66,7 @@ class _FeatureItem extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         child: InkWell(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const ContactList()),
-            );
+            onClick();
           },
           child: Container(
             padding: const EdgeInsets.all(8.0),
