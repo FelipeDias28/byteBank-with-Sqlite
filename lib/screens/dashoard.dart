@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_byte_bank/screens/contacts_list.dart';
+import 'package:new_byte_bank/screens/transaction_list.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -30,7 +31,9 @@ class Dashboard extends StatelessWidget {
               _FeatureItem(
                 name: 'Transaction Feed',
                 icon: Icons.description,
-                onClick: () {},
+                onClick: () {
+                  _showTransectionList(context);
+                },
               ),
             ],
           ),
@@ -42,6 +45,14 @@ class Dashboard extends StatelessWidget {
   void _showContactsList(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => const ContactList()),
+    );
+  }
+
+  void _showTransectionList(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TransactionsList(),
+      ),
     );
   }
 }
