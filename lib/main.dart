@@ -5,7 +5,7 @@ import 'package:new_byte_bank/screens/dashoard.dart';
 
 void main() {
   runApp(const BytebankApp());
-  findAll();
+  findAll().then((transactions) => print('new transaction: $transactions'));
 }
 
 class BytebankApp extends StatelessWidget {

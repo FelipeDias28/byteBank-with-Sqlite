@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_byte_bank/components/progress.dart';
 import 'package:new_byte_bank/database/dao/contact_dao.dart';
 import 'package:new_byte_bank/models/contact.dart';
 import 'package:new_byte_bank/screens/contact_form.dart';
@@ -29,16 +30,7 @@ class _ContactListState extends State<ContactList> {
               break;
             // Quando ainda esta carregando e não foi iniciado.
             case ConnectionState.waiting:
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    CircularProgressIndicator(),
-                    Text('Loading')
-                  ],
-                ),
-              );
+              return const Progress();
             // Quando o snapshot já tem as informações mas o future ainda não foi carregado
             case ConnectionState.active:
               break;
