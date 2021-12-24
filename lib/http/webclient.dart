@@ -30,7 +30,10 @@ Future<List<Transaction>> findAll() async {
   Client client = InterceptedClient.build(interceptors: [LoggingInterceptor()]);
 
   final Response response = await client.get(
-    Uri.http('3dc0-189-34-156-251.ngrok.io', 'transactions'),
+    Uri.http(
+      'bb63-189-34-156-251.ngrok.io',
+      'transactions',
+    ),
   );
 
   final List<dynamic> decodedJson = jsonDecode(response.body);
@@ -53,4 +56,51 @@ Future<List<Transaction>> findAll() async {
   }
 
   return transactions;
+}
+
+Future<Transaction> save(Transaction transaction) async {
+  Client client = InterceptedClient.build(interceptors: [LoggingInterceptor()]);
+  final Map<String, dynamic> transactionMap = {
+    "value": transaction.value,
+    "contact": {
+      "name": transaction.contact.name,
+      "accountNumber": transaction.contact.accountNummber,
+    }
+  };
+
+  final String transactionJson = jsonEncode(transactionMap);
+
+  // final Response response = await client.post(
+  //   Uri.http(
+  //       'bb63-189-34-156-251.ngrok.io',
+  //       'transactions',
+  //       {
+  //         'Content-type': 'application/josn',
+  //         "password": "1000",
+  //       },
+  //       transactionJson),
+  // );
+
+  final Response response = await client.post(
+      Uri.http(
+        'bb63-189-34-156-251.ngrok.io',
+        'transactions',
+      ),
+      headers: {
+        'Content-type': 'application/json',
+        'password': '1000',
+      },
+      body: transactionJson);
+
+  Map<String, dynamic> json = jsonDecode(response.body);
+
+  final Map<String, dynamic> contactJson = json['contact'];
+  return Transaction(
+    json['value'],
+    Contact(
+      0,
+      contactJson['name'],
+      contactJson['accountNumber'],
+    ),
+  );
 }

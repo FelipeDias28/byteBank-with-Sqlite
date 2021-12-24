@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:new_byte_bank/http/webclient.dart';
+import 'package:new_byte_bank/models/transaction.dart';
 
 import 'package:new_byte_bank/screens/dashoard.dart';
 
+import 'models/contact.dart';
+
 void main() {
   runApp(const BytebankApp());
+  save(Transaction(20000, Contact(0, "Gui", 2000)))
+      .then((transaction) => print(transaction));
   findAll().then((transactions) => print('new transaction: $transactions'));
 }
 
