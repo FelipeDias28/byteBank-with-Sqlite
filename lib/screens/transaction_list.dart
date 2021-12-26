@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:new_byte_bank/components/centered_message.dart';
 import 'package:new_byte_bank/components/progress.dart';
-import 'package:new_byte_bank/http/webclient.dart';
-import 'package:new_byte_bank/models/contact.dart';
+import 'package:new_byte_bank/http/webclient/transaction_wevclient.dart';
 import 'package:new_byte_bank/models/transaction.dart';
 
 class TransactionsList extends StatelessWidget {
-  const TransactionsList({Key? key}) : super(key: key);
+  final TransactionWebClient _webClient = TransactionWebClient();
+
+  TransactionsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class TransactionsList extends StatelessWidget {
         title: const Text('Transactions'),
       ),
       body: FutureBuilder<List<Transaction>>(
-        future: findAll(),
+        future: _webClient.findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
